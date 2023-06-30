@@ -1,0 +1,57 @@
+header{
+    display: grid;
+    grid-template-areas:
+    "image"
+    "heading1";
+    grid-template-rows:max-content;
+  
+
+    margin: 0;
+  
+    font-style: sans-serif;
+    background-color: transparent;
+}
+
+.header-title{
+    grid-area: heading1;
+    color:white;
+    
+}
+
+.header-logo{
+    grid-area: image;
+
+    height:  100px;
+    width: 80px;
+}
+@media screen and (min-width: 50rem){
+    header{
+        display: grid;
+        grid-template-areas:
+        "image heading1";
+        grid-template-rows: 25% auto;
+      
+        margin: 0;
+      
+        font-style: sans-serif;
+        background-color:rgb(21, 36, 36);
+        
+    }
+    
+    .header-title{
+        grid-area: heading1;
+
+        padding-top: 0.6rem;
+
+        color:white;
+    }
+    
+    .header-logo{
+        grid-area: image;
+    
+        height: 100px;
+        width: 80px;
+    }
+
+}
+

@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.94d1a254.css",
+    "main.js": "/static/js/main.a0ac5ebf.js",
+    "static/media/nasa.mp4": "/static/media/nasa.3dd8fc6fdab41ce19791.mp4",
+    "static/media/Nasaastronaut.gif": "/static/media/Nasaastronaut.ab27d4d90eb597958b4d.gif",
+    "static/media/Nasaimage.webp": "/static/media/Nasaimage.8b68cb2272ee0d767c87.webp",
+    "index.html": "/index.html",
+    "main.94d1a254.css.map": "/static/css/main.94d1a254.css.map",
+    "main.a0ac5ebf.js.map": "/static/js/main.a0ac5ebf.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.94d1a254.css",
+    "static/js/main.a0ac5ebf.js"
+  ]
+}

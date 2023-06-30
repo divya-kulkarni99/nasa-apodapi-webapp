@@ -1,0 +1,133 @@
+.background-container
+{
+  background-image: url('../../video/Nasaimage.webp');
+  background-size: cover;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+.content-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.image-description {
+  flex: 1;
+  text-align: center;
+}
+.gif-image {
+  max-width: 100%;
+}
+
+.description {
+  color: white;
+}
+.signup-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-form {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.signup-form-email,
+.signup-form-password,
+.signup-form-fname,
+.signup-form-lname{
+  width: 80%;
+
+  padding: 0.4rem;
+  margin-bottom: 10px;
+  height: 30px;  
+}
+
+.signup-form-button {
+  margin-top: 10px;
+  align-self: center;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 8px;
+  background-color: #2196f3; 
+  color: white;
+  border: none;
+  cursor: pointer;
+
+}
+
+.signup-form-button:hover {
+  background-color: #1976d2; 
+}
+
+
+
+.signup-heading {
+  text-align: center;
+  color: white;
+}
+.signup-to-login{
+  text-align: center;
+  color: white;
+  margin-top: 10px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+/* Center the sign up button */
+.form-submit-signup {
+  
+  text-align: center;
+  color: white;
+}
+
+.login-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin-top: 10px;
+ 
+}
+
+
+
+.signup-form-password-error{
+  margin-top: 5px;
+  padding: 5px;
+  font-size: 14px;
+  text-align: center;
+  border-radius: 4px;
+  background-color: #ff6b6b; /* Set the background color to red */
+  color: white;
+  width: 60%;
+}
+
+
+
+.or {
+  text-align: center;
+  color:white;
+}
+.google-auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  height: 50px;
+}
+
+.google-auth-button {
+
+  display: block;
+  margin: 0 auto;
+}
