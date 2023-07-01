@@ -69,7 +69,9 @@
   background-color: #1976d2; 
 }
 
-
+a{
+  color: yellowgreen;
+}
 
 .login-heading {
   text-align: center;
