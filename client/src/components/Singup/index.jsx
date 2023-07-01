@@ -22,7 +22,7 @@ const Signup = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const url = "https://nasa-apodapi-webapp.vercel.app/api/users";
+			const url = "https://nasa-apodapi-webapp-lyart.vercel.app/api/users";
 			const { data: res } = await axios.post(url, data);
 			navigate("/login");
 			console.log(res.message);
