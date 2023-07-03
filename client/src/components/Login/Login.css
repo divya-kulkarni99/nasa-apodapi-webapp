@@ -3,16 +3,26 @@
   background-size: cover;
   width: 100vw;
   height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .content-container {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-description {
+  flex: 1;
+  text-align: center;
 }
 
 .gif-image {
-  height: 150px;
-  width: 150px;
+  height: 300px;
+  width: 300px;
 }
 
 .description {
@@ -20,7 +30,7 @@
 }
 
 .login-section {
-  /* flex: 1; */
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -123,132 +133,3 @@ a{
   margin: 0 auto;
 }
 
-@media screen and (min-width: 44rem){
-  .background-container {
-    background-image: url('../../video/Nasaimage.webp');
-    background-size: cover;
-    width: 100vw;
-    height: 100vh;
-
-  }
-  
-  .content-container {
-    display: flex;
-    flex-direction: row;
-    
-  }
-  
-
-  .gif-image {
-    height: 300px;
-    width: 300px;
-  }
-  
-  .description {
-    color: white;
-  }
-  
-  .login-section {
-    /* flex: 1; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .login-form {
-  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  
-  }
-  
-  .login-form-email,
-  .login-form-password {
-    width: 100%;
-  
-    padding: 0.4rem;
-    margin-bottom: 30px;
-    height: 30px; 
-  }
-  
-  .login-form-submit-button {
-    margin-top: 10px;
-    align-self: center;
-    padding: 10px 20px;
-    font-size: 18px;
-    border-radius: 8px;
-    background-color: #2196f3; 
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .login-form-submit-button:hover {
-    background-color: #1976d2; 
-  }
-  
-  a{
-    color: yellowgreen;
-  }
-  
-  .login-heading {
-    text-align: center;
-    color: white;
-  }
-  .login-to-signup{
-    text-align: center;
-    color: white;
-  }
-  
-  .form-submit-signup {
-    
-    text-align: center;
-    color: white;
-  }
-  
-  .signup-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 10px;
-  
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-   
-  }
-  
-  
-  
-  .login-form-password-error {
-    margin-top: 5px;
-    padding: 5px;
-    font-size: 14px;
-    text-align: center;
-    border-radius: 4px;
-    background-color: #ff6b6b; 
-    color: #ffffff;
-    width: 100%;
-  }
-  
-  
-  
-  .or {
-    text-align: center;
-    color:white;
-  }
-  
-  .google-auth-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-  
-  }
-  
-  .google-auth-button {
-  
-    display: block;
-    margin: 0 auto;
-  }
-}
