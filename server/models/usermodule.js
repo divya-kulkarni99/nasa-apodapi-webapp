@@ -8,8 +8,10 @@ const userSchema = new mongoose.Schema({
     firstName:{type: String, required:true},
     lastName:{type: String, required:true},
     email:{type: String, required:true},
-    password:{type: String, required:true},
-
+    password:{type: String, required: false}, // Optional for Google OAuth users
+    googleId:{type: String, required: false}, // Google user ID
+    picture:{type: String, required: false}, // Profile picture URL from Google
+    authProvider:{type: String, default: 'local'}, // 'local' or 'google'
 });
 
 userSchema.methods.generateAuthToken = function(){
