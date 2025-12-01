@@ -14,8 +14,9 @@ connection();
 app.use(express.json());
 app.use(cors(
   {
-      origin: ["https://nasa-apodapi-webapp-1.vercel.app"],
+      origin: ["https://nasa-apodapi-webapp-1.vercel.app", "https://nasa-apodapi-webapp-lyart.vercel.app", "http://localhost:3000"],
       methods: ["POST", "GET"],
+      credentials: true
   }
 ));
 
