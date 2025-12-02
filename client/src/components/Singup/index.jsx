@@ -22,8 +22,19 @@ const Signup = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const url = "https://nasa-apodapi-webapp-lyart.vercel.app/api/users";
-			const { data: res } = await axios.post(url, data);
+			// Use env variable if set, otherwise detect environment
+			const getApiUrl = () => {
+				if (process.env.REACT_APP_API_URL) {
+					return process.env.REACT_APP_API_URL;
+				}
+				// Check if running in production (Vercel)
+				if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+					return 'https://nasa-apodapi-webapp-lyart.vercel.app';
+				}
+				return 'http://localhost:8080';
+			};
+			const url = getApiUrl();
+			const { data: res } = await axios.post(`${url}/api/users`, data);
 			navigate("/login");
 			console.log(res.message);
 		} catch (error) {
@@ -110,8 +121,8 @@ const Signup = () => {
 							
 					</Link>
 					<p className="or">OR</p>
-					<div  className="google-auth-container">
-					<button className="google-auth-button"><GoogleAuth /></button>
+					<div className="google-auth-container">
+						<GoogleAuth />
 					</div>
 			    	</div>
 				

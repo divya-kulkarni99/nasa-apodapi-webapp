@@ -1,6 +1,7 @@
 import React from 'react';
 import './Main.css';
 import NasaImage from './NasaImage';
+import Header from '../Header';
 
 const Main = () => {
   const handleLogout = () => {
@@ -10,11 +11,7 @@ const Main = () => {
 
   return (
     <div className="main-container">
-      <nav className="navbar">
-        <button className="logout-button" onClick={handleLogout}>
-          Logout
-        </button>
-      </nav>
+      <Header onLogout={handleLogout} />
       <NasaImage />
     </div>
   );
