@@ -14,7 +14,6 @@ app.use(express.json());
 app.use(
   cors({
     origin: [
-      'https://nasa-apodapi-webapp-1.vercel.app',
       'https://nasa-apodapi-webapp-prww.vercel.app/',
       'http://localhost:3000',
     ],
