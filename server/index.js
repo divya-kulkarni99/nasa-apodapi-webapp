@@ -8,7 +8,7 @@ const authRoutes = require('./routes/auth');
 
 
 // database connection
-connection();
+connection().catch(err => console.error("Database connection error:", err));
 
 // middlewares
 app.use(express.json());
