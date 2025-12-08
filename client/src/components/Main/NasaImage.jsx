@@ -6,34 +6,57 @@ import './NasaImage.css';
 const NASA_APOD_API_KEY =
   process.env.REACT_APP_NASA_APOD_KEY ||
   '12iL8nxkoBafRhI7RDtlw2NuDdRGPacpoAj5Ida9';
+
 const NasaImage = () => {
   const [imageData, setImageData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchImageData = async () => {
       const today = moment().format('YYYY-MM-DD');
-
       const url = `https://api.nasa.gov/planetary/apod?api_key=${NASA_APOD_API_KEY}&date=${today}`;
 
       try {
         const response = await axios.get(url);
         setImageData(response.data);
+        setLoading(false);
         console.log(response.data);
       } catch (error) {
         console.error('Error fetching NASA APOD data:', error);
+        setError('Failed to load NASA image. Please try again later.');
+        setLoading(false);
       }
     };
 
     fetchImageData();
   }, []);
 
+  if (loading) {
+    return (
+      <div className="container">
+        <h1>Loading NASA Astronomy Picture of the Day...</h1>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container">
+        <h1>Error</h1>
+        <p>{error}</p>
+      </div>
+    );
+  }
+
   if (!imageData) {
     return (
-      <div>
+      <div className="container">
         <h1>Image not found</h1>
       </div>
     );
   }
+
   const formattedDate = moment(imageData.date).format('DD MMMM YYYY');
 
   return (

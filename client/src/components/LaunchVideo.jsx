@@ -3,6 +3,10 @@ import videoFile from '../video/nasa.mp4';
 import './LaunchVideo.css';
 
 const LaunchVideo = () => {
+  const handleVideoEnd = () => {
+    window.location.href = '/login'; 
+  };
+
   useEffect(() => {
     const videoElement = document.getElementById('launch-video');
     if (videoElement) {
@@ -14,21 +18,15 @@ const LaunchVideo = () => {
         videoElement.removeEventListener('ended', handleVideoEnd);
       }
     };
-  });
-
-  const handleVideoEnd = () => {
-    window.location.href = '/login'; 
-  };
+  }, []); // Empty dependency array is correct here
 
   return (
     <div className="launch-video-container">
       <video id="launch-video" autoPlay muted className="launch-video-element">
         <source src={videoFile} type="video/mp4" />
-       
       </video>
     </div>
   );
 };
 
 export default LaunchVideo;
-

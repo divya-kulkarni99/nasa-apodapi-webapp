@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 
+// Using ReactDOM.render for React 17 compatibility
 ReactDOM.render(
 	<React.StrictMode>
 		<BrowserRouter>

@@ -10,7 +10,7 @@ Displays the Image uploaded by Astronomy picture of the day uploaded by NASA on 
 Tech stack used for developing the Web Application :
 1) Frontend: ReactJS framework.
 2) Backend:  NodeJS, and ExpressJS.
-3) Database: Mongoose from MongoDB is used for storing the bcrypted user information
+3) Database: PostgreSQL is used for storing the bcrypted user information
 
 Installation/Steps to Run this web application
 
@@ -23,7 +23,7 @@ Step 2. Open client (frontend) folder
 Step 3. Install project dependency with npm (Node Package Manager) or yarn (Yet Another Resource Negotiator)
 1. `npm install or yarn install`
 2. `npm install react-router-dom`
-3. `npm install moments`
+3. `npm install moment`
 
 Step 4. Open server (backend) folder 
 `cd server`
@@ -35,10 +35,11 @@ Step 5. Install project dependency with npm (Node Package Manager) or yarn (Yet 
 Step 6. Setting up .env file
 1. `cd server`
 2. create .env file
-3. Add the following
-`UserInformation = 'YOUR_MONGODB_URL'`
-`JWTokenPrivateKey ='JWEBTOKEN_PRIVATE_KEY'`
+3. Add the following:
+`DATABASE_URL = 'YOUR_POSTGRESQL_DATABASE_URL'`
+`JWTokenPrivateKey = 'JWEBTOKEN_PRIVATE_KEY'`
 `SALT = 10`
+`GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID'`
 
 Step 7. Obtaining NASA_APOD_API_KEY
 a. Visit the NASA API portal: Go to the NASA API portal website at https://api.nasa.gov/.

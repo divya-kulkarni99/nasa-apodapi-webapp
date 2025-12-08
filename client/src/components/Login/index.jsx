@@ -82,6 +82,7 @@ const Login = () => {
               onChange={handleChange}
               value={data.password}
               required
+              autoComplete="current-password"
               className="login-form-password"
             />
             {error && <div className="login-form-password-error">{error}</div>}

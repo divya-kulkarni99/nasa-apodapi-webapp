@@ -1,18 +1,18 @@
-import { useState } from "react";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 import GoogleAuth from '../Login/GoogleAuth';
-import './Signup.css'
+import './Signup.css';
 import gifImage from '../../video/Nasaastronaut.gif';
 
 const Signup = () => {
 	const [data, setData] = useState({
-		firstName: "",
-		lastName: "",
-		email: "",
-		password: "",
+		firstName: '',
+		lastName: '',
+		email: '',
+		password: '',
 	});
-	const [error, setError] = useState("");
+	const [error, setError] = useState('');
 	const navigate = useNavigate();
 
 	const handleChange = ({ currentTarget: input }) => {
@@ -35,7 +35,7 @@ const Signup = () => {
 			};
 			const url = getApiUrl();
 			const { data: res } = await axios.post(`${url}/api/users`, data);
-			navigate("/login");
+			navigate('/login');
 			console.log(res.message);
 		} catch (error) {
 			if (
@@ -65,7 +65,7 @@ const Signup = () => {
 				</div>	
 				<div className="signup-section">
 					<form className="signup-form" onSubmit={handleSubmit}>
-						<h1 className="signup-heading" >Create an account</h1>
+						<h1 className="signup-heading">Create an account</h1>
 						
 						<input
 							type="text"
@@ -104,6 +104,7 @@ const Signup = () => {
 							onChange={handleChange}
 							value={data.password}
 							required
+							autoComplete="new-password"
 							className="signup-form-password"
 						/>
 						
@@ -115,7 +116,7 @@ const Signup = () => {
 						</form>
 				
 				<div className="login-section">
-					<Link  to="/login">
+					<Link to="/login">
 							
 						<h4 className="signup-to-login">Already have an account? Login</h4>
 							
@@ -133,4 +134,3 @@ const Signup = () => {
 };
 
 export default Signup;
-

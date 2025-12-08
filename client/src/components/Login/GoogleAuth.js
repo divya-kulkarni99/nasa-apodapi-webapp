@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 function GoogleAuth() {
   const navigate = useNavigate();
   const [isGoogleLoaded, setIsGoogleLoaded] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleCallbackResponse = useCallback(
     async (response) => {
@@ -27,10 +28,21 @@ function GoogleAuth() {
         };
         const url = getApiUrl();
 
+        console.log('Sending credential to backend:', url);
+
         // Send the credential to our backend for verification
-        const { data: res } = await axios.post(`${url}/api/auth/google`, {
-          credential: response.credential,
-        });
+        const { data: res } = await axios.post(
+          `${url}/api/auth/google`,
+          {
+            credential: response.credential,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+          }
+        );
 
         // Store the token from our backend
         localStorage.setItem('token', res.data);
@@ -41,13 +53,17 @@ function GoogleAuth() {
         console.error('Google Sign-In Error:', error);
         if (error.response) {
           console.error('Error response:', error.response.data);
-          alert(
-            `Failed to sign in with Google: ${
-              error.response.data.message || 'Unknown error'
-            }`
+          setError(
+            error.response.data.message || 'Failed to sign in with Google'
+          );
+        } else if (error.request) {
+          console.error('No response received:', error.request);
+          setError(
+            'Cannot connect to server. Please make sure the backend is running on port 8080.'
           );
         } else {
-          alert('Failed to sign in with Google. Please try again.');
+          console.error('Error setting up request:', error.message);
+          setError('Failed to sign in with Google. Please try again.');
         }
       }
     },
@@ -68,22 +84,36 @@ function GoogleAuth() {
           console.error(
             'REACT_APP_GOOGLE_CLIENT_ID is not set in environment variables'
           );
+          setError('Google Sign-In is not configured');
           return;
         }
 
-        window.google.accounts.id.initialize({
-          client_id: clientId,
-          callback: handleCallbackResponse,
-        });
-
-        const signInDiv = document.getElementById('signInDiv');
-        if (signInDiv) {
-          window.google.accounts.id.renderButton(signInDiv, {
-            theme: 'outline',
-            size: 'large',
-            type: 'standard',
+        try {
+          // Initialize Google Identity Services
+          window.google.accounts.id.initialize({
+            client_id: clientId,
+            callback: handleCallbackResponse,
+            auto_select: false,
+            cancel_on_tap_outside: true,
+            context: 'signin',
           });
-          setIsGoogleLoaded(true);
+
+          const signInDiv = document.getElementById('signInDiv');
+          if (signInDiv) {
+            // Render the button
+            window.google.accounts.id.renderButton(signInDiv, {
+              theme: 'outline',
+              size: 'large',
+              type: 'standard',
+              text: 'signin_with',
+              shape: 'rectangular',
+              logo_alignment: 'left',
+            });
+            setIsGoogleLoaded(true);
+          }
+        } catch (err) {
+          console.error('Error initializing Google Sign-In:', err);
+          setError('Failed to initialize Google Sign-In');
         }
       } else {
         // Retry after a short delay if Google API not loaded yet
@@ -98,9 +128,14 @@ function GoogleAuth() {
   return (
     <div>
       <div id="signInDiv"></div>
-      {!isGoogleLoaded && (
+      {!isGoogleLoaded && !error && (
         <div style={{ color: '#666', fontSize: '14px' }}>
           Loading Google Sign-In...
+        </div>
+      )}
+      {error && (
+        <div style={{ color: '#d32f2f', fontSize: '14px', marginTop: '10px' }}>
+          {error}
         </div>
       )}
     </div>
