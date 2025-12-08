@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: [
-      'https://nasa-apodapi-webapp-g4zk.vercel.app',
+      'https://nasa-apodapi-webapplication.app',
       'https://nasa-apodapi-webapp.vercel.app',
     ],
     methods: ['POST', 'GET', 'OPTIONS'],
