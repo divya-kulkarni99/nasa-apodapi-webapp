@@ -28,6 +28,8 @@ app.use(
       'http://127.0.0.1:3000',
       'https://nasa-apodapi-webapp-1.vercel.app',
       'https://nasa-apodapi-webapp-prww.vercel.app',
+      'https://nasa-apodapi-webapp-g4zk.vercel.app',
+      'https://nasa-apodapi-webapp.vercel.app',
     ],
     methods: ['POST', 'GET', 'OPTIONS'],
     credentials: true,
