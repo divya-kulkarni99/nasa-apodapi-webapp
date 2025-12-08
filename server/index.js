@@ -9,25 +9,39 @@ const authRoutes = require('./routes/auth');
 // database connection
 connection().catch((err) => console.error('Database connection error:', err));
 
+// Fix Cross-Origin-Opener-Policy to allow Google OAuth popups
+// Only set in production; in development, we skip it to avoid issues
+app.use((req, res, next) => {
+  if (process.env.NODE_ENV === 'production') {
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+    res.setHeader('Cross-Origin-Embedder-Policy', 'unsafe-none');
+  }
+  next();
+});
+
 // middlewares
 app.use(express.json());
 app.use(
   cors({
     origin: [
-      'https://nasa-apodapi-webapp-prww.vercel.app',
       'http://localhost:3000',
+      'http://127.0.0.1:3000',
+      'https://nasa-apodapi-webapp-1.vercel.app',
+      'https://nasa-apodapi-webapp-prww.vercel.app',
     ],
-    methods: ['POST', 'GET'],
+    methods: ['POST', 'GET', 'OPTIONS'],
     credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
   })
 );
 
 app.get('/', (req, res) => {
   res.json('Hello');
 });
+
 // routes
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 
 const port = process.env.PORT || 8080;
-app.listen(port, console.log(`Listening on port ${port}...`));
+app.listen(port, () => console.log(`Listening on port ${port}...`));
