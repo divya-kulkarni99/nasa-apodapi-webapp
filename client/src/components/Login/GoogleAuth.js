@@ -22,7 +22,7 @@ function GoogleAuth() {
             window.location.hostname !== 'localhost' &&
             window.location.hostname !== '127.0.0.1'
           ) {
-            return 'https://nasa-apodapi-webapp-lyart.vercel.app';
+            return 'https://nasa-apodapi-webapplication.vercel.app';
           }
           return 'http://localhost:8080';
         };
