@@ -1,107 +1,28 @@
+const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const passwordComplexity = require('joi-password-complexity');
-const { getPool } = require('../userinformation');
 
-// User model methods
-const User = {
-  // Find user by email
-  async findOne(query) {
-    const pool = getPool();
-    if (!pool) throw new Error('Database connection not available');
-
-    if (query.email) {
-      const result = await pool.query('SELECT * FROM users WHERE email = $1', [
-        query.email,
-      ]);
-      return result.rows[0] || null;
-    }
-    return null;
+const userSchema = new mongoose.Schema(
+  {
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    email: { type: String, required: true, unique: true, lowercase: true },
+    password: { type: String },
+    googleId: { type: String, unique: true, sparse: true },
+    picture: { type: String },
+    authProvider: { type: String, default: 'local' },
   },
+  { timestamps: true }
+);
 
-  // Find user by ID
-  async findById(id) {
-    const pool = getPool();
-    if (!pool) throw new Error('Database connection not available');
-
-    const result = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
-    return result.rows[0] || null;
-  },
-
-  // Create new user
-  async create(userData) {
-    const pool = getPool();
-    if (!pool) throw new Error('Database connection not available');
-
-    const {
-      firstName,
-      lastName,
-      email,
-      password,
-      googleId,
-      picture,
-      authProvider = 'local',
-    } = userData;
-
-    const result = await pool.query(
-      `INSERT INTO users ("firstName", "lastName", email, password, "googleId", picture, "authProvider")
-       VALUES ($1, $2, $3, $4, $5, $6, $7)
-       RETURNING *`,
-      [
-        firstName,
-        lastName,
-        email,
-        password || null,
-        googleId || null,
-        picture || null,
-        authProvider,
-      ]
-    );
-
-    return result.rows[0];
-  },
-
-  // Update user
-  async update(id, updates) {
-    const pool = getPool();
-    if (!pool) throw new Error('Database connection not available');
-
-    const fields = [];
-    const values = [];
-    let paramCount = 1;
-
-    Object.keys(updates).forEach((key) => {
-      if (updates[key] !== undefined) {
-        fields.push(`"${key}" = $${paramCount}`);
-        values.push(updates[key]);
-        paramCount++;
-      }
-    });
-
-    if (fields.length === 0) {
-      return await this.findById(id);
-    }
-
-    fields.push(`"updatedAt" = CURRENT_TIMESTAMP`);
-    values.push(id);
-
-    const result = await pool.query(
-      `UPDATE users SET ${fields.join(
-        ', '
-      )} WHERE id = $${paramCount} RETURNING *`,
-      values
-    );
-
-    return result.rows[0] || null;
-  },
-
-  // Generate auth token (static method)
-  generateAuthToken(user) {
-    return jwt.sign({ _id: user.id }, process.env.JWTokenPrivateKey, {
-      expiresIn: '10d',
-    });
-  },
+userSchema.statics.generateAuthToken = function (user) {
+  return jwt.sign({ _id: user._id }, process.env.JWTokenPrivateKey, {
+    expiresIn: '10d',
+  });
 };
+
+const User = mongoose.model('User', userSchema);
 
 // Validation schema
 const validate = (data) => {

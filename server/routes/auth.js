@@ -72,16 +72,13 @@ router.post('/google', async (req, res) => {
     let user = await User.findOne({ email });
 
     if (user) {
-      // User exists - update Google info if not already set
       if (!user.googleId) {
-        user = await User.update(user.id, {
-          googleId: googleId,
-          picture: picture || user.picture,
-          authProvider: 'google',
-        });
+        user.googleId = googleId;
+        user.picture = picture || user.picture;
+        user.authProvider = 'google';
+        await user.save();
       }
     } else {
-      // Create new user
       user = await User.create({
         firstName: given_name || 'User',
         lastName: family_name || '',

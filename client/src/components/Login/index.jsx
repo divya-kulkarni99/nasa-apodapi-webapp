@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import GoogleAuth from './GoogleAuth';
+import { API_BASE_URL } from '../../api/config';
 import './Login.css';
 import gifImage from '../../video/Nasaastronaut.gif';
 
@@ -16,22 +17,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Use env variable if set, otherwise detect environment
-      const getApiUrl = () => {
-        if (process.env.REACT_APP_API_URL) {
-          return process.env.REACT_APP_API_URL;
-        }
-        // Check if running in production (Vercel)
-        if (
-          window.location.hostname !== 'localhost' &&
-          window.location.hostname !== '127.0.0.1'
-        ) {
-          return 'https://nasa-apodapi-webapp-lyart.vercel.app';
-        }
-        return 'http://localhost:8080';
-      };
-      const url = getApiUrl();
-      const { data: res } = await axios.post(`${url}/api/auth`, data);
+      const { data: res } = await axios.post(`${API_BASE_URL}/api/auth`, data);
       localStorage.setItem('token', res.data);
       window.location = '/main';
     } catch (error) {

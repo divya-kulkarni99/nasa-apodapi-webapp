@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import { API_BASE_URL } from '../../api/config';
 import './NasaImage.css';
-
-const NASA_APOD_API_KEY =
-  process.env.REACT_APP_NASA_APOD_KEY ||
-  '12iL8nxkoBafRhI7RDtlw2NuDdRGPacpoAj5Ida9';
 
 const NasaImage = () => {
   const [imageData, setImageData] = useState(null);
@@ -15,8 +12,7 @@ const NasaImage = () => {
   useEffect(() => {
     const fetchImageData = async () => {
       const today = moment().format('YYYY-MM-DD');
-      const url = `https://api.nasa.gov/planetary/apod?api_key=${NASA_APOD_API_KEY}&date=${today}`;
-
+      const url = `${API_BASE_URL}/api/apod?date=${today}`;
       try {
         const response = await axios.get(url);
         setImageData(response.data);
