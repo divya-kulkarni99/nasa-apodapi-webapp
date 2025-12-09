@@ -58,6 +58,7 @@ const Login = () => {
               onChange={handleChange}
               value={data.email}
               required
+              autoComplete="email"
               className="login-form-email"
             />
 
