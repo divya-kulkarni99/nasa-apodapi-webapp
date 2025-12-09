@@ -38,7 +38,7 @@ function GoogleAuth() {
         }
       }
     },
-    [API_BASE_URL, navigate]
+    [navigate]
   );
 
   useEffect(() => {
